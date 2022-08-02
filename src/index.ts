@@ -25,6 +25,18 @@ program
 function getParams(): any {
   program.parse();
   const opts = program.opts();
+  
+  let seed;
+  if (opts.seed == undefined) {
+    if (process.env.SEED == undefined) {
+      seed = defaultConfig.seed;
+    } else {
+      seed = process.env.SEED;
+    }
+  } else {
+    seed = opts.seed;
+  }
+
   return {
     testName: program.args[0],
     config: {
@@ -48,7 +60,7 @@ function getParams(): any {
         opts.tps == undefined
           ? defaultConfig.txDelayMs
           : Math.ceil(1000 / opts.tps),
-      seed: opts.seed == undefined ? defaultConfig.seed : opts.seed,
+      seed: seed,
       nTx: Number(program.args[1]),
     },
   };
