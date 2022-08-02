@@ -79,6 +79,21 @@
   dependencies:
     "@jridgewell/trace-mapping" "0.3.9"
 
+"@ethersproject/abi@^5.6.3":
+  version "5.6.4"
+  resolved "https://registry.yarnpkg.com/@ethersproject/abi/-/abi-5.6.4.tgz#f6e01b6ed391a505932698ecc0d9e7a99ee60362"
+  integrity sha512-TTeZUlCeIHG6527/2goZA6gW5F8Emoc7MrZDC7hhP84aRGvW3TEdTnZR08Ls88YXM1m2SuK42Osw/jSi3uO8gg==
+  dependencies:
+    "@ethersproject/address" "^5.6.1"
+    "@ethersproject/bignumber" "^5.6.2"
+    "@ethersproject/bytes" "^5.6.1"
+    "@ethersproject/constants" "^5.6.1"
+    "@ethersproject/hash" "^5.6.1"
+    "@ethersproject/keccak256" "^5.6.1"
+    "@ethersproject/logger" "^5.6.0"
+    "@ethersproject/properties" "^5.6.0"
+    "@ethersproject/strings" "^5.6.1"
+
 "@ethersproject/abstract-provider@^5.6.1":
   version "5.6.1"
   resolved "https://registry.yarnpkg.com/@ethersproject/abstract-provider/-/abstract-provider-5.6.1.tgz#02ddce150785caf0c77fe036a0ebfcee61878c59"
@@ -151,6 +166,22 @@
   integrity sha512-QSq9WVnZbxXYFftrjSjZDUshp6/eKp6qrtdBtUCm0QxCV5z1fG/w3kdlcsjMCQuQHUnAclKoK7XpXMezhRDOLg==
   dependencies:
     "@ethersproject/bignumber" "^5.6.2"
+
+"@ethersproject/contracts@^5.6.2":
+  version "5.6.2"
+  resolved "https://registry.yarnpkg.com/@ethersproject/contracts/-/contracts-5.6.2.tgz#20b52e69ebc1b74274ff8e3d4e508de971c287bc"
+  integrity sha512-hguUA57BIKi6WY0kHvZp6PwPlWF87MCeB4B7Z7AbUpTxfFXFdn/3b0GmjZPagIHS+3yhcBJDnuEfU4Xz+Ks/8g==
+  dependencies:
+    "@ethersproject/abi" "^5.6.3"
+    "@ethersproject/abstract-provider" "^5.6.1"
+    "@ethersproject/abstract-signer" "^5.6.2"
+    "@ethersproject/address" "^5.6.1"
+    "@ethersproject/bignumber" "^5.6.2"
+    "@ethersproject/bytes" "^5.6.1"
+    "@ethersproject/constants" "^5.6.1"
+    "@ethersproject/logger" "^5.6.0"
+    "@ethersproject/properties" "^5.6.0"
+    "@ethersproject/transactions" "^5.6.2"
 
 "@ethersproject/hash@^5.6.1":
   version "5.6.1"
@@ -386,10 +417,10 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
-"@latticexyz/stressoor@^0.3.2":
-  version "0.3.2"
-  resolved "https://npm.pkg.github.com/download/@latticexyz/stressoor/0.3.2/44ab3c9cdd0753dc6392303f1aae9eed170df8cf61dad9a42e50922ac5074513#5b6789484b9e65f4f93984e078f19dc05b3722e5"
-  integrity sha512-RGMLLBlksPgZqSYQM38b5syHNUQUfnwGSQG5MDsT7X4tRy73DBsom+3WkYEeGC1SASk+/rWc8WYmU1L49R/pGQ==
+"@latticexyz/stressoor@^0.4.0":
+  version "0.4.0"
+  resolved "https://npm.pkg.github.com/download/@latticexyz/stressoor/0.4.0/e299b82e36038b00080feb96ac8add960e270791485cefe2e769845204589ab6#97eeecf7b21842263ab88fa37af43d2d4257b9c4"
+  integrity sha512-dSWI1tShJ9bPIk7SmC/yr0byacL6lZ2L7XJyuiBgIrgZs8WKd1a3MDwIarmzTv2ZYtIFfcR97pON1X5WnOmw1A==
   dependencies:
     "@ethersproject/properties" "^5.6.0"
     "@ethersproject/providers" "^5.6.8"

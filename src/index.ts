@@ -1,9 +1,10 @@
 import { Command } from "commander";
 
 import { main as sendEth } from "./sendEth";
+import { main as hash } from "./hash";
 import { config as defaultConfig } from "./config";
 
-const stressTests: Record<string, any> = { sendEth };
+const stressTests: Record<string, any> = { sendEth, hash };
 
 const program = new Command();
 
