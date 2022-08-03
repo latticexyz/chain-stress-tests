@@ -4,10 +4,11 @@ import { main as sendEth } from "./sendEth";
 import { main as hash } from "./hash";
 import { config as defaultConfig } from "./config";
 
+// Add new stress tests here
 const stressTests: Record<string, any> = { sendEth, hash };
 
+// Spec command arguments and options
 const program = new Command();
-
 program
   .name("chain-stress-test")
   .description("run a stressoor.js stress test on a chain")
@@ -22,10 +23,11 @@ program
   .option("-t, --tps <number>", "max tps")
   .option("-s, --seed <number>", "seed");
 
+// Parse parameters and return { testName, config }
 function getParams(): any {
   program.parse();
   const opts = program.opts();
-  
+
   let seed;
   if (opts.seed == undefined) {
     if (process.env.SEED == undefined) {
@@ -66,6 +68,7 @@ function getParams(): any {
   };
 }
 
+// Run a stress test and log the output
 async function main() {
   const params = getParams();
   const stressTest = stressTests[params.testName];
@@ -75,6 +78,7 @@ async function main() {
   const config = params.config;
   const testOutput = await stressTest(config);
   const dataStr: string = JSON.stringify(testOutput, null, 4);
+  // We add cues to make the logs easier to parse
   console.log("[outputstart]" + dataStr + "[outputend]");
 }
 

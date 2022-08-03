@@ -11,7 +11,10 @@ const { sendTransactionGetReceipt } = Prefabs.Call;
 
 const DEFAULT_KEY_PREFIX: string = "fff";
 
-export function genFaucetPrivateKey(seed: string, testContext: TestContext): string {
+export function genFaucetPrivateKey(
+  seed: string,
+  testContext: TestContext
+): string {
   const keyPrefix =
     testContext.keyPrefix === undefined
       ? DEFAULT_KEY_PREFIX
@@ -29,9 +32,10 @@ export function newFaucetWallet(
   return faucet;
 }
 
+// Generate a faucet-funding init function
 export function genWalletFundInit(
-  faucet: Wallet,
-  addrFunding: number,
+  faucet: Wallet, // Super-funder wallet
+  addrFunding: number, // Funding to transfer to every new faucet
   testContext: TestContext
 ): ShootFunc {
   const fundWalletInit: ShootFunc = async (
