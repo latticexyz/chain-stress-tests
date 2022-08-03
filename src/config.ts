@@ -1,3 +1,5 @@
+// See https://github.com/latticexyz/stressoor.js/blob/main/src/Core.ts
+
 const maxTps = 10;
 
 export const config = {
