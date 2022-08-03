@@ -1,3 +1,5 @@
+A collection of blockchain stress-tests based on [stressoor.js](https://github.com/latticexyz/stressoor.js).
+
 # Quickstart
 
 `sendEth` spams the target RPC with simple ETH transfer transactions at a certain rate.
@@ -21,7 +23,7 @@ This will send ETH transfer transactions from your machine to the RPC.
 
 `yarn start:k8s <NAME>`
 
-This will spin up a job in the cluster and run the same stress-test with the parameters specified in `infra/.env`.
+This will spin up a job in the cluster and run the same stress-test with the parameters specified in `infra/.env`. You need to have `kubectl` set up (see [run.sh](/infra/cmd/run.sh)).
 
 ## Run other stress-tests
 
