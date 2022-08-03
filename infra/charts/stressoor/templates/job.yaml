@@ -1,0 +1,33 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ include "common.names.fullname" . }}
+  labels:
+    {{- include "common.labels.standard" . | nindent 4 }}
+spec:
+  template:
+    spec:
+      containers:
+      - name: stress
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.pullPolicy }}
+        command:
+            - sh
+            - -ac
+            - |
+              yarn start {{ .Values.test.name }} {{ .Values.test.nTx }} -c {{ .Values.chain.chainId }} -w {{ .Values.chain.wsRpcUrl }} -k {{ .Values.faucet.pKey }}
+        env:
+        - name: SEED
+          value: "{{ .Values.seed }}"
+        volumeMounts:
+          - name: src
+            mountPath: /app/src
+      imagePullSecrets:
+        - name: {{ include "common.names.fullname" . }}-image-cred
+      volumes:
+        - name: src
+          configMap:
+            name: {{ include "common.names.fullname" . }}
+      restartPolicy: Never
+  backoffLimit: 0
+  

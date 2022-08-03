@@ -1,0 +1,21 @@
+releases:
+{{- range until (int (env "N_PODS" | default 1)) }}
+- name: {{ requiredEnv "NAME" }}-stress-test-{{ . }}
+  recreatePods: true
+  chart: ./charts/stressoor
+  values:
+  - "./charts/stressoor/values.yaml"
+  - seed: "{{ . }}"
+  set:
+  - name: chain.wsRpcUrl
+    value: {{ requiredEnv "WS_RPC" }}
+  - name: chain.chainId
+    value: {{ requiredEnv "CHAIN_ID" }}
+  - name: test.name
+    value: {{ requiredEnv "TEST" }}
+  - name: test.nTx
+    value: {{ requiredEnv "N_TX" }}
+  - name: faucet.pKey
+    value: {{ requiredEnv "PKEY" }}
+  wait: true
+{{- end }}

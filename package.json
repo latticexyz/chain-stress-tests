@@ -24,8 +24,11 @@
   },
   "scripts": {
     "commit": "cz",
-    "start": "node --loader ts-node/esm --experimental-specifier-resolution=node ./src/index.ts",
-    "deploy": "cd contracts && sh deploy.sh",
-    "deploy:local": "yarn deploy http://localhost:8545"
+    "start": "yarn start:local",
+    "start:local": "node --loader ts-node/esm --experimental-specifier-resolution=node ./src/index.ts",
+    "start:cluster": "cd infra && sh ./cmd/run.sh",
+    "deploy": "yarn deploy:local",
+    "deploy:local": "yarn deploy:chain http://localhost:8545",
+    "deploy:chain": "cd contracts && sh deploy.sh"
   }
 }
