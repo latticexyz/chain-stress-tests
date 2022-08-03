@@ -14,8 +14,8 @@ const { sendTransactionGetReceipt } = Prefabs.Call;
 const { txInfo } = Prefabs.Metrics;
 const { initHotNonce } = Prefabs.Init;
 
-import { newFaucetWallet, genWalletFundInit } from "./utils/utils";
-import { reports } from "./utils/reportStack";
+import { newFaucetWallet, genWalletFundInit } from "./utils";
+import { reports } from "./reportStack";
 
 export type InitFunc = (
   provider: WebSocketProvider,
