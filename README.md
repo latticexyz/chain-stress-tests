@@ -2,6 +2,10 @@
 
 `sendEth` spams the target RPC with simple ETH transfer transactions at a certain rate.
 
+## Setup
+
+`yarn install`
+
 ## Run locally
 
 ```bash
@@ -24,6 +28,9 @@ This will spin up a job in the cluster and run the same stress-test with the par
 `hash` spams the target RPC with function calls to [Hasher.sol](/contracts/src/Hasher.sol) that compute hashes on-chain.
 
 ```bash
+# Deploy Hasher.sol
+yarn deploy:chain <JSON_RPC>
+# Do: Set the HASHER_ADDRESS constant in src/hash.ts to the deployed address
 yarn start hash
     <number of transactions to send> \
     --rpc <websocket RPC URL> \
