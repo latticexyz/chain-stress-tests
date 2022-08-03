@@ -1,4 +1,4 @@
-const maxTps = 50;
+const maxTps = 10;
 
 export const config = {
   rpcUrl: {
@@ -13,7 +13,7 @@ export const config = {
   log: true,
   async: true,
   gasPrice: 100,
-  maxNAddr: 50,
+  maxNAddr: 10,
   txDelayMs: Math.ceil(1000 / maxTps),
   seed: 0,
 };
