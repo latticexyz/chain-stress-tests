@@ -1,0 +1,17 @@
+seed: ""
+
+chain:
+  chainId: 0
+  wsRpcUrl: "change-me"
+
+test:
+  name: "sendEth"
+  nTx: 10
+
+faucet:
+  pKey: ""
+
+image:
+  repository: "ghcr.io/latticexyz/stressoor"
+  tag: "v0.1.0"
+  pullPolicy: IfNotPresent
