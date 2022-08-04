@@ -24,9 +24,10 @@
   },
   "scripts": {
     "commit": "cz",
-    "start": "yarn start:local",
-    "start:local": "node --loader ts-node/esm --experimental-specifier-resolution=node ./src/index.ts",
-    "start:k8s": "cd infra && sh ./cmd/run.sh",
+    "fund": "node --loader ts-node/esm --experimental-specifier-resolution=node ./src/fund.ts",
+    "run": "yarn run:local",
+    "run:local": "node --loader ts-node/esm --experimental-specifier-resolution=node ./src/index.ts",
+    "run:k8s": "cd infra && sh ./cmd/run.sh",
     "deploy": "yarn deploy:local",
     "deploy:local": "yarn deploy:chain http://localhost:8545",
     "deploy:chain": "cd contracts && sh deploy.sh"

@@ -10,7 +10,7 @@ const stressTests: Record<string, any> = { sendEth, hash };
 // Spec command arguments and options
 const program = new Command();
 program
-  .name("chain-stress-test")
+  .name("stress-test")
   .description("run a stressoor.js stress test on a chain")
   .argument("<test>", "name of the test to run e.g., sendEth")
   .argument("<nTx>", "number of transactions")
