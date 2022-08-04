@@ -24,4 +24,4 @@ const paramsFunc: ParamsFunc = async (testContext, txContext) => {
   return tx;
 };
 
-export const main = genStdTest(paramsFunc, async (p, t) => {}, 21000, 1);
+export const main = genStdTest(paramsFunc, initFunc, 21000, 1);
