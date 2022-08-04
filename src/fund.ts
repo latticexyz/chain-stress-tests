@@ -5,7 +5,7 @@ import {
   Prefabs,
 } from "@latticexyz/stressoor";
 
-const { sendTransactionGetReceipt } = Prefabs.Call;
+const { sendTransactionGetReceipt, sendTransaction } = Prefabs.Call;
 
 import { Command } from "commander";
 
@@ -19,6 +19,7 @@ program
   .description("fund sub-faucets")
   .argument("<n>", "fund faucets up to seed n")
   .argument("<amount>", "amount to fund faucets with")
+  .option("-r, --wait", "wait for transaction receipts")
   .option("-w, --ws <string>", "websocket rpc url")
   .option("-c, --chainId <number>", "chain ID")
   .option("-k, --pKey <string>", "faucet private key")
@@ -32,6 +33,7 @@ function getParams(): any {
     nn: program.args[0],
     amount: program.args[1],
     config: {
+      wait: opts.wait,
       rpcUrl: {
         http: defaultConfig.rpcUrl.http,
         websocket: opts.ws || defaultConfig.rpcUrl.websocket,
@@ -78,9 +80,14 @@ async function main() {
       gasLimit: 21000,
       gasPrice: config.gasPrice,
     };
-    promises.push(
-      sendTransactionGetReceipt(params, testContext, { wallet: faucet })
-    );
+    const txContext = { wallet: faucet };
+    let txPromise;
+    if (config.wait) {
+      txPromise = sendTransactionGetReceipt(params, testContext, txContext);
+    } else {
+      txPromise = sendTransaction(params, testContext, txContext);
+    }
+    promises.push(txPromise);
   }
   await Promise.all(promises);
 }

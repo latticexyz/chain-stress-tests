@@ -76,6 +76,7 @@ async function main() {
     throw "not a test";
   }
   const config = params.config;
+  // TODO: Raise error if data is missing
   const testOutput = await stressTest(config);
   const dataStr: string = JSON.stringify(testOutput, null, 4);
   // We add cues to make the logs easier to parse
