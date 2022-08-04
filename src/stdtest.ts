@@ -31,6 +31,11 @@ export function genStdTest(
   return async function main(config: any): Promise<any> {
     const nTx: number = config.nTx;
 
+    /*
+    testSeed is used to generate the faucet and stressor.js addresses.
+    Running two stress-tests with the same seed at the same time would lead to issues
+    as they would send transactions from the same addresses and cause nonce collisions.
+    */
     const testSeed: number = config.seed;
     const testSeedHex: string = config.seed.toString(16);
 
