@@ -1,3 +1,8 @@
+/**
+ * This is a script to fund sub-faucets.
+ * You only need to do that if you intend to run multiple stress-tests simultaneously.
+ */
+
 import {
   WebSocketProvider,
   Wallet,
@@ -22,7 +27,7 @@ program
   .option("-r, --wait", "wait for transaction receipts")
   .option("-w, --ws <string>", "websocket rpc url")
   .option("-c, --chainId <number>", "chain ID")
-  .option("-k, --pKey <string>", "faucet private key")
+  .option("-k, --pKey <string>", "super faucet private key")
   .option("-g, --gasPrice <number>", "gas price");
 
 // Parse parameters and return { config }
