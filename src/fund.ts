@@ -58,7 +58,6 @@ function getParams(): any {
   };
 }
 
-// TODO: add yarn script and index stuff and commander
 async function main() {
   const params = getParams();
   const { nn, amount, config } = params;
