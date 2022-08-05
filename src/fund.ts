@@ -4,7 +4,7 @@
  */
 
 import {
-  WebSocketProvider,
+  JsonRpcProvider,
   Wallet,
   TestContext,
   Prefabs,
@@ -14,7 +14,7 @@ const { sendTransactionGetReceipt, sendTransaction } = Prefabs.Call;
 
 import { Command } from "commander";
 
-import { genFaucetPrivateKey } from "./utils";
+import { newProvider, genFaucetPrivateKey } from "./utils";
 import { config as defaultConfig } from "./config";
 
 // Spec command arguments and options
@@ -61,10 +61,7 @@ function getParams(): any {
 async function main() {
   const params = getParams();
   const { nn, amount, config } = params;
-  const provider: WebSocketProvider = new WebSocketProvider(
-    config.rpcUrl.websocket,
-    config.network
-  );
+  const provider: JsonRpcProvider = newProvider(config);
   let faucet = new Wallet(config.faucetPrivateKey, provider);
   await faucet.initHotNonce();
   const promises: Promise<unknown>[] = [];

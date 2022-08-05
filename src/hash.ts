@@ -1,6 +1,6 @@
 import {
   ParamsFunc,
-  WebSocketProvider,
+  JsonRpcProvider,
   TestContext,
 } from "@latticexyz/stressoor";
 import { Contract } from "@ethersproject/contracts";
@@ -19,7 +19,7 @@ const GAS_LIMIT = 26713 + 200 * (N_HASHES_TX - 1);
 let tx: any;
 
 const initFunc: InitFunc = async (
-  provider: WebSocketProvider,
+  provider: JsonRpcProvider,
   testContext: TestContext
 ) => {
   const contract = new Contract(HASHER_ADDRESS, HASHER_ABI, provider);

@@ -1,6 +1,7 @@
 import {
   TestContext,
   Wallet,
+  JsonRpcProvider,
   WebSocketProvider,
   Prefabs,
   TxContext,
@@ -10,6 +11,14 @@ import {
 const { sendTransactionGetReceipt } = Prefabs.Call;
 
 const DEFAULT_KEY_PREFIX: string = "fff";
+
+export function newProvider(config: any): JsonRpcProvider {
+  if (config.rpcUrl.websocket === undefined) {
+    return new JsonRpcProvider(config.rpcUrl.http);
+  } else {
+    return new WebSocketProvider(config.rpcUrl.websocket);
+  }
+}
 
 export function genFaucetPrivateKey(
   seed: string,
@@ -24,7 +33,7 @@ export function genFaucetPrivateKey(
 
 export function newFaucetWallet(
   seed: string,
-  provider: WebSocketProvider,
+  provider: JsonRpcProvider,
   testContext: TestContext
 ): Wallet {
   const pKey: string = genFaucetPrivateKey(seed, testContext);
