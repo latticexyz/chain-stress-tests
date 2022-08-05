@@ -43,7 +43,7 @@ function getParams(): any {
     testName: program.args[0],
     config: {
       rpcUrl: {
-        http: defaultConfig.rpcUrl.http,
+        http: opts.http || defaultConfig.rpcUrl.http,
         websocket: opts.ws || defaultConfig.rpcUrl.websocket,
       },
       network: {
