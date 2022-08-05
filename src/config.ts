@@ -4,8 +4,8 @@ const maxTps = 10;
 
 export const config = {
   rpcUrl: {
-    http: "http://localhost:8545",
-    websocket: "ws://localhost:8546",
+    http: undefined,
+    websocket: undefined,
   },
   network: {
     chainId: undefined,
