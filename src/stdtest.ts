@@ -53,9 +53,11 @@ export function genStdTest(
       gasPrice: config.gasPrice,
     };
 
+    let network: any = undefined;
+    if (config.network.chainId !== undefined) network = config.network;
     const provider: WebSocketProvider = new WebSocketProvider(
       config.rpcUrl.websocket,
-      config.network
+      network
     );
 
     await provider.getBlockNumber();
