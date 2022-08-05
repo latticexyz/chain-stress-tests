@@ -29,8 +29,8 @@ function getParams(): any {
   const opts = program.opts();
 
   let seed;
-  if (opts.seed == undefined) {
-    if (process.env.SEED == undefined) {
+  if (opts.seed === undefined) {
+    if (process.env.SEED === undefined) {
       seed = defaultConfig.seed;
     } else {
       seed = process.env.SEED;
@@ -48,7 +48,7 @@ function getParams(): any {
       },
       network: {
         chainId:
-          opts.chainId == undefined
+          opts.chainId === undefined
             ? defaultConfig.network.chainId
             : Number(opts.chainId),
         name: "unknown",
@@ -59,7 +59,7 @@ function getParams(): any {
       gasPrice: Number(opts.gasPrice) || defaultConfig.gasPrice,
       maxNAddr: Number(opts.nAddr) || defaultConfig.maxNAddr,
       txDelayMs:
-        opts.tps == undefined
+        opts.tps === undefined
           ? defaultConfig.txDelayMs
           : Math.ceil(1000 / opts.tps),
       seed: seed,
@@ -72,7 +72,7 @@ function getParams(): any {
 async function main() {
   const params = getParams();
   const stressTest = stressTests[params.testName];
-  if (stressTest == undefined) {
+  if (stressTest === undefined) {
     throw "not a test";
   }
   const config = params.config;
