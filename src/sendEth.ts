@@ -1,6 +1,6 @@
 import {
   ParamsFunc,
-  WebSocketProvider,
+  JsonRpcProvider,
   TestContext,
 } from "@latticexyz/stressoor";
 import { genStdTest, InitFunc } from "./stdtest";
@@ -8,7 +8,7 @@ import { genStdTest, InitFunc } from "./stdtest";
 let tx: any;
 
 const initFunc: InitFunc = async (
-  provider: WebSocketProvider,
+  provider: JsonRpcProvider,
   testContext: TestContext
 ) => {
   // Craft the tx wallet.sendTransaction will be called with

@@ -1,6 +1,6 @@
 import {
   runStressTest,
-  WebSocketProvider,
+  JsonRpcProvider,
   Wallet,
   ShootFunc,
   ParamsFunc,
@@ -14,11 +14,11 @@ const { sendTransactionGetReceipt } = Prefabs.Call;
 const { txInfo } = Prefabs.Metrics;
 const { initHotNonce } = Prefabs.Init;
 
-import { newFaucetWallet, genWalletFundInit } from "./utils";
+import { newProvider, newFaucetWallet, genWalletFundInit } from "./utils";
 import { reports } from "./reportStack";
 
 export type InitFunc = (
-  provider: WebSocketProvider,
+  provider: JsonRpcProvider,
   testContext: TestContext
 ) => Promise<void>;
 
@@ -43,7 +43,7 @@ export function genStdTest(
     const addrFunding: number =
       // We hard-code a margin because we might have to pay for L1 costs
       // TODO: make this cleaner
-      50000 + Math.ceil(nTx / nAddr) * gasLimit * config.gasPrice + txCost;
+      1000000 + Math.ceil(nTx / nAddr) * gasLimit * config.gasPrice + txCost;
 
     const testContext: TestContext = {
       id: testSeed,
@@ -55,10 +55,7 @@ export function genStdTest(
 
     let network: any = undefined;
     if (config.network.chainId !== undefined) network = config.network;
-    const provider: WebSocketProvider = new WebSocketProvider(
-      config.rpcUrl.websocket,
-      network
-    );
+    let provider: JsonRpcProvider = newProvider(config);
 
     await provider.getBlockNumber();
 
