@@ -43,8 +43,7 @@ export function genStdTest(
     const addrFunding: number =
       // We hard-code a margin because we might have to pay for L1 costs
       // TODO: make this cleaner
-      50000
-        + Math.ceil(nTx / nAddr) * gasLimit * config.gasPrice + txCost;
+      50000 + Math.ceil(nTx / nAddr) * gasLimit * config.gasPrice + txCost;
 
     const testContext: TestContext = {
       id: testSeed,
@@ -66,8 +65,17 @@ export function genStdTest(
     let faucet: Wallet;
 
     if (testSeed == 0) {
+      /**
+       * faucet -> addresses
+       */
       faucet = new Wallet(config.faucetPrivateKey, provider);
     } else {
+      /**
+       * sub-faucet -> addresses
+       * Use yarn fund to fund sub-faucets
+       * We use sub-faucets to avoid nonce collisions if we are running
+       * multiple independent tests simultaneously.
+       */
       faucet = newFaucetWallet(testSeedHex, provider, testContext);
     }
 
