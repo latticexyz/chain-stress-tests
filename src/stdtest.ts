@@ -29,8 +29,6 @@ export function genStdTest(
   txCost: number
 ) {
   return async function main(config: any): Promise<any> {
-    const nTx: number = config.nTx;
-
     /**
      * testSeed is used to generate the faucet and stressor.js addresses.
      * Running two stress-tests with the same seed at the same time would lead to issues
@@ -39,6 +37,7 @@ export function genStdTest(
     const testSeed: number = config.seed;
     const testSeedHex: string = config.seed.toString(16);
 
+    const nTx: number = config.nTx;
     const nAddr: number = Math.min(nTx, config.maxNAddr);
     const addrFunding: number =
       // We hard-code a margin because we might have to pay for L1 costs
@@ -46,9 +45,7 @@ export function genStdTest(
       1e12 + Math.ceil(nTx / nAddr) * gasLimit * config.gasPrice + txCost;
 
     const testContext: TestContext = {
-      id: testSeed,
-      nTx: nTx,
-      nAddr: nAddr,
+      seed: testSeed,
       log: config.log,
       gasPrice: config.gasPrice,
     };
@@ -56,8 +53,6 @@ export function genStdTest(
     let network: any = undefined;
     if (config.network.chainId !== undefined) network = config.network;
     let provider: JsonRpcProvider = newProvider(config);
-
-    await provider.getBlockNumber();
 
     await initFunc(provider, testContext);
 
@@ -80,6 +75,12 @@ export function genStdTest(
 
     await faucet.initHotNonce();
 
+    const faucetData: any = {
+      address: faucet.address,
+      addrFunding: addrFunding,
+      nAddr: nAddr,
+    };
+
     const fundWallet: ShootFunc = genWalletFundInit(
       faucet,
       addrFunding,
@@ -90,27 +91,23 @@ export function genStdTest(
     const callFunc: CallFunc = sendTransactionGetReceipt;
     const metricsFunc: MetricsFunc = txInfo;
 
-    const otherParams: any = {
-      async: config.async,
-      nAddr: nAddr,
-      nTx: nTx,
-      txDelayMs: config.txDelayMs,
-      roundDelayMs: 0,
-    };
-
     const reportOutputs: any[] = await runStressTest(
-      provider,
       paramsFunc,
       callFunc,
       metricsFunc,
       reports,
       initFuncs,
-      otherParams.async,
-      otherParams.nAddr,
-      otherParams.nTx,
-      otherParams.txDelayMs,
-      otherParams.roundDelayMs,
-      testSeedHex,
+      {
+        rpcProvider: provider,
+        nAddr: nAddr,
+        addrGenSeed: testSeedHex,
+      },
+      {
+        nTx: nTx,
+        async: config.async,
+        txDelayMs: config.txDelayMs,
+        roundDelayMs: 0,
+      },
       testContext
     );
 
@@ -120,7 +117,7 @@ export function genStdTest(
       reportOutputs,
       testContext,
       config,
-      otherParams,
+      faucetData,
     };
   };
 }
