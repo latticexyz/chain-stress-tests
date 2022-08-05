@@ -45,7 +45,7 @@ function getParams(): any {
       },
       network: {
         chainId:
-          opts.chainId == undefined
+          opts.chainId === undefined
             ? defaultConfig.network.chainId
             : Number(opts.chainId),
         name: "unknown",
