@@ -43,7 +43,7 @@ export function genStdTest(
     const addrFunding: number =
       // We hard-code a margin because we might have to pay for L1 costs
       // TODO: make this cleaner
-      1000000 + Math.ceil(nTx / nAddr) * gasLimit * config.gasPrice + txCost;
+      1e12 + Math.ceil(nTx / nAddr) * gasLimit * config.gasPrice + txCost;
 
     const testContext: TestContext = {
       id: testSeed,
