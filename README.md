@@ -74,9 +74,10 @@ For simple transfer/contract call transactions, looking through [sendEth.ts](/sr
 
 Remember to add the test to `index.ts` to be able to call it with `yarn run`.
 
-## Complex stress-tests
+## Other stress-tests
 
 For complex stress-tests you might want to familiarize yourself with the fundamentals of stressoor.js and create a custom version of [stdtest.ts](/src/stdtest.ts).
+This also applies to stress-tests that do things other than send transactions e.g. read-only RPC calls.
 
 ## Kubernetes
 
