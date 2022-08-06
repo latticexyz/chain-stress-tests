@@ -13,7 +13,7 @@ A collection of blockchain stress-tests based on [stressoor.js](https://github.c
 ```bash
 yarn start sendEth \
     <number of transactions to send> \
-    --rpc <websocket RPC URL> \
+    --http <json rpc url> \
     --pKey <faucet private key>
 ```
 
@@ -35,7 +35,7 @@ yarn deploy:chain <JSON_RPC>
 # Do: Set the HASHER_ADDRESS constant in src/hash.ts to the deployed address
 yarn start hash
     <number of transactions to send> \
-    --rpc <websocket RPC URL> \
+    --http <json rpc url> \
     --pKey <faucet private key>
 ```
 
