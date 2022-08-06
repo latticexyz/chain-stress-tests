@@ -13,7 +13,7 @@ A collection of blockchain stress-tests based on [stressoor.js](https://github.c
 ```bash
 yarn start sendEth \
     <number of transactions to send> \
-    --http <json rpc url> \
+    --http <json rpc url> \ # use --ws for websocket
     --pKey <faucet private key>
 ```
 
