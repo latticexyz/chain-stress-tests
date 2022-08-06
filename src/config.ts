@@ -15,7 +15,7 @@ export const config = {
   log: true,
   async: true,
   gasPrice: 100,
-  maxNAddr: 10,
-  txDelayMs: Math.ceil(1000 / maxTps),
+  maxNWallets: 10,
+  callDelayMs: Math.ceil(1000 / maxTps),
   seed: 0,
 };

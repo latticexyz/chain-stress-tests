@@ -13,13 +13,13 @@ program
   .name("stress-test")
   .description("run a stressoor.js stress test on a chain")
   .argument("<test>", "name of the test to run e.g., sendEth")
-  .argument("<nTx>", "number of transactions")
+  .argument("<nCalls>", "number of transactions")
   .option("-w, --ws <string>", "websocket rpc url")
   .option("-h, --http <string>", "json rpc url")
   .option("-c, --chainId <number>", "chain ID")
   .option("-k, --pKey <string>", "faucet private key")
   .option("-g, --gasPrice <number>", "gas price")
-  .option("-n, --nAddr <number>", "max number of addresses")
+  .option("-n, --nWallets <number>", "max number of wallets")
   .option("-t, --tps <number>", "max tps")
   .option("-s, --seed <number>", "seed");
 
@@ -57,13 +57,13 @@ function getParams(): any {
       log: defaultConfig.log,
       async: defaultConfig.async,
       gasPrice: Number(opts.gasPrice) || defaultConfig.gasPrice,
-      maxNAddr: Number(opts.nAddr) || defaultConfig.maxNAddr,
-      txDelayMs:
+      maxNWallets: Number(opts.nWallets) || defaultConfig.maxNWallets,
+      callDelayMs:
         opts.tps === undefined
-          ? defaultConfig.txDelayMs
+          ? defaultConfig.callDelayMs
           : Math.ceil(1000 / opts.tps),
       seed: seed,
-      nTx: Number(program.args[1]),
+      nCalls: Number(program.args[1]),
     },
   };
 }
@@ -76,7 +76,7 @@ async function main() {
     throw "not a test";
   }
   const config = params.config;
-  // TODO: Raise error if data is missing
+  // TODO: raise error if data is missing
   const testOutput = await stressTest(config);
   const dataStr: string = JSON.stringify(testOutput, null, 4);
   // We add cues to make the logs easier to parse

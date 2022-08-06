@@ -24,14 +24,14 @@ const initFunc: InitFunc = async (
 ) => {
   const contract = new Contract(HASHER_ADDRESS, HASHER_ABI, provider);
   // Craft the tx wallet.sendTransaction will be called with
-  // txContext: { wallet, txIdx, addrIdx }
+  // callContext: { wallet, callIdx, walletIdx }
   tx = await contract.populateTransaction.hash(N_HASHES_TX, {
     gasLimit: GAS_LIMIT,
     gasPrice: testContext.gasPrice,
   });
 };
 
-const paramsFunc: ParamsFunc = async (testContext, txContext) => {
+const paramsFunc: ParamsFunc = async (callContext, testContext) => {
   return tx;
 };
 

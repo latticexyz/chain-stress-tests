@@ -20,7 +20,7 @@ const initFunc: InitFunc = async (
   };
 };
 
-const paramsFunc: ParamsFunc = async (testContext, txContext) => {
+const paramsFunc: ParamsFunc = async (callContext, testContext) => {
   return tx;
 };
 

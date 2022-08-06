@@ -2,7 +2,7 @@ import {
   runStressTest,
   JsonRpcProvider,
   Wallet,
-  ShootFunc,
+  StressFunc,
   ParamsFunc,
   CallFunc,
   MetricsFunc,
@@ -30,19 +30,19 @@ export function genStdTest(
 ) {
   return async function main(config: any): Promise<any> {
     /**
-     * testSeed is used to generate the faucet and stressor.js addresses.
+     * testSeed is used to generate the faucet and stressor.js wallets.
      * Running two stress-tests with the same seed at the same time would lead to issues
      * as they would send transactions from the same addresses and cause nonce collisions.
      */
     const testSeed: number = config.seed;
     const testSeedHex: string = config.seed.toString(16);
 
-    const nTx: number = config.nTx;
-    const nAddr: number = Math.min(nTx, config.maxNAddr);
-    const addrFunding: number =
+    const nCalls: number = config.nCalls;
+    const nWallets: number = Math.min(nCalls, config.maxNWallets);
+    const walletFunding: number =
       // We hard-code a margin because we might have to pay for L1 costs
       // TODO: make this cleaner
-      1e12 + Math.ceil(nTx / nAddr) * gasLimit * config.gasPrice + txCost;
+      1e12 + Math.ceil(nCalls / nWallets) * gasLimit * config.gasPrice + txCost;
 
     const testContext: TestContext = {
       seed: testSeed,
@@ -60,12 +60,12 @@ export function genStdTest(
 
     if (testSeed == 0) {
       /**
-       * faucet -> addresses
+       * faucet -> wallets
        */
       faucet = new Wallet(config.faucetPrivateKey, provider);
     } else {
       /**
-       * sub-faucet -> addresses
+       * sub-faucet -> wallets
        * Use yarn fund to fund sub-faucets
        * We use sub-faucets to avoid nonce collisions if we are running
        * multiple independent tests simultaneously.
@@ -77,13 +77,13 @@ export function genStdTest(
 
     const faucetData: any = {
       address: faucet.address,
-      addrFunding: addrFunding,
-      nAddr: nAddr,
+      walletFunding: walletFunding,
+      nWallets: nWallets,
     };
 
-    const fundWallet: ShootFunc = genWalletFundInit(
+    const fundWallet: StressFunc = genWalletFundInit(
       faucet,
-      addrFunding,
+      walletFunding,
       testContext
     );
     const initFuncs = [fundWallet, initHotNonce];
@@ -99,13 +99,13 @@ export function genStdTest(
       initFuncs,
       {
         rpcProvider: provider,
-        nAddr: nAddr,
-        addrGenSeed: testSeedHex,
+        nWallets: nWallets,
+        walletGenSeed: testSeedHex,
       },
       {
-        nTx: nTx,
+        nCalls: nCalls,
         async: config.async,
-        txDelayMs: config.txDelayMs,
+        callDelayMs: config.callDelayMs,
         roundDelayMs: 0,
       },
       testContext

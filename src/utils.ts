@@ -1,11 +1,11 @@
 import {
-  TestContext,
   Wallet,
   JsonRpcProvider,
   WebSocketProvider,
+  CallContext,
+  TestContext,
   Prefabs,
-  TxContext,
-  ShootFunc,
+  StressFunc,
 } from "@latticexyz/stressoor";
 
 const { sendTransactionGetReceipt } = Prefabs.Call;
@@ -44,28 +44,28 @@ export function newFaucetWallet(
 // Generate a faucet-funding init function
 export function genWalletFundInit(
   faucet: Wallet, // Super-funder wallet
-  addrFunding: number, // Funding to transfer to every new faucet
+  walletFunding: number, // Funding to transfer to every new faucet
   testContext: TestContext
-): ShootFunc {
-  const fundWalletInit: ShootFunc = async (
+): StressFunc {
+  const fundWalletInit: StressFunc = async (
     wallet: Wallet,
-    txIdx: number,
-    addrIdx: number
+    callIdx: number,
+    walletIdx: number
   ) => {
-    const txContext: TxContext = {
+    const callContext: CallContext = {
       wallet: faucet,
-      txIdx: txIdx,
-      addrIdx: addrIdx,
+      callIdx: callIdx,
+      walletIdx: walletIdx,
     };
     await sendTransactionGetReceipt(
       {
         to: wallet.address,
-        value: addrFunding,
+        value: walletFunding,
         gasLimit: 21000,
         gasPrice: testContext.gasPrice,
       },
-      testContext,
-      txContext
+      callContext,
+      testContext
     );
   };
   return fundWalletInit;
