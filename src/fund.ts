@@ -53,7 +53,7 @@ function getParams(): any {
       faucetPrivateKey: opts.pKey || defaultConfig.faucetPrivateKey,
       log: defaultConfig.log,
       gasPrice: Number(opts.gasPrice) || defaultConfig.gasPrice,
-      maxNAddr: Number(opts.nAddr) || defaultConfig.maxNAddr,
+      maxNWallets: Number(opts.nWallets) || defaultConfig.maxNWallets,
     },
   };
 }
@@ -81,12 +81,12 @@ async function main() {
       gasLimit: 21000,
       gasPrice: config.gasPrice,
     };
-    const txContext = { wallet: faucet };
+    const callContext = { wallet: faucet };
     let txPromise;
     if (config.wait) {
-      txPromise = sendTransactionGetReceipt(params, testContext, txContext);
+      txPromise = sendTransactionGetReceipt(params, callContext, testContext);
     } else {
-      txPromise = sendTransaction(params, testContext, txContext);
+      txPromise = sendTransaction(params, callContext, testContext);
     }
     promises.push(txPromise);
   }
