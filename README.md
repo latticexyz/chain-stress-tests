@@ -11,7 +11,7 @@ A collection of blockchain stress-tests based on [stressoor.js](https://github.c
 ## Run locally
 
 ```bash
-yarn run sendEth \
+yarn start sendEth \
     <number of transactions to send> \
     --rpc <websocket RPC URL> \
     --pKey <faucet private key>
@@ -21,7 +21,7 @@ This will send ETH transfer transactions from your machine to the RPC.
 
 ## Run on k8s
 
-`yarn run:k8s <NAME>`
+`yarn start:k8s <NAME>`
 
 This will spin up a job in the cluster and run the same stress-test with the parameters specified in `infra/.env`. You need to have `kubectl` set up (see [run.sh](/infra/cmd/run.sh)).
 
@@ -33,7 +33,7 @@ This will spin up a job in the cluster and run the same stress-test with the par
 # Deploy Hasher.sol
 yarn deploy:chain <JSON_RPC>
 # Do: Set the HASHER_ADDRESS constant in src/hash.ts to the deployed address
-yarn run hash
+yarn start hash
     <number of transactions to send> \
     --rpc <websocket RPC URL> \
     --pKey <faucet private key>
@@ -44,7 +44,7 @@ yarn run hash
 Stress-test parameters can be specified in `src/config.ts` and in the command-line (non-exhaustive). The latter takes preference.
 
 ```
-> yarn run --help
+> yarn start --help
 
 Usage: chain-stress-test [options] <test> <nTx>
 
@@ -72,7 +72,7 @@ Options:
 
 For simple transfer/contract call transactions, looking through [sendEth.ts](/src/sendEth.ts) or [hash.ts](/src/hash.ts) (respectively) and modifying a copy should be quite simple.
 
-Remember to add the test to `index.ts` to be able to call it with `yarn run`.
+Remember to add the test to `index.ts` to be able to call it with `yarn start`.
 
 ## Other stress-tests
 
