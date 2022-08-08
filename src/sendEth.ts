@@ -2,8 +2,12 @@ import {
   ParamsFunc,
   JsonRpcProvider,
   TestContext,
+  Prefabs,
 } from "@latticexyz/stressoor";
 import { genStdTest, InitFunc } from "./stdtest";
+
+const { sendTransactionGetReceipt } = Prefabs.Call;
+const { txInfo } = Prefabs.Metrics;
 
 let tx: any;
 
@@ -24,4 +28,11 @@ const paramsFunc: ParamsFunc = async (callContext, testContext) => {
   return tx;
 };
 
-export const main = genStdTest(paramsFunc, initFunc, 21000, 1);
+export const main = genStdTest(
+  initFunc,
+  paramsFunc,
+  sendTransactionGetReceipt,
+  txInfo,
+  21000,
+  1
+);
