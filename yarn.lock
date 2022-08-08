@@ -417,10 +417,10 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
-"@latticexyz/stressoor@0.6.0":
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/@latticexyz/stressoor/-/stressoor-0.6.0.tgz#29daeee812dca4ad8018897b810fa047261e9511"
-  integrity sha512-Y6lRjuWD/aAuwzFQ1eXlHbT6G1KkdO13Uv3FJZH8RX7Gw7zWJJkJ+GhogbIkzV5CbzBqutYM7lXv5MitO/2xiw==
+"@latticexyz/stressoor@0.6.1":
+  version "0.6.1"
+  resolved "https://npm.pkg.github.com/download/@latticexyz/stressoor/0.6.1/e462970688b2b4ede86022831e65a349e4c14b9c#e462970688b2b4ede86022831e65a349e4c14b9c"
+  integrity sha512-drWcYTH+9X9ZQde+raEDPRyJmYUdGm1gpsXV52/lpcxWqr94A9TM/McR9LNvSou2fEbJSxebk9hwybgcgomLYg==
   dependencies:
     "@ethersproject/properties" "^5.6.0"
     "@ethersproject/providers" "^5.6.8"
