@@ -2,9 +2,13 @@ import {
   ParamsFunc,
   JsonRpcProvider,
   TestContext,
+  Prefabs,
 } from "@latticexyz/stressoor";
 import { Contract } from "@ethersproject/contracts";
 import { genStdTest, InitFunc } from "./stdtest";
+
+const { sendTransactionGetReceipt } = Prefabs.Call;
+const { txInfo } = Prefabs.Metrics;
 
 // Contract constants
 const HASHER_ADDRESS = "0x34140d2716bf37a4f6b57907cf295845b2bd69ba";
@@ -35,4 +39,11 @@ const paramsFunc: ParamsFunc = async (callContext, testContext) => {
   return tx;
 };
 
-export const main = genStdTest(paramsFunc, initFunc, GAS_LIMIT, 0);
+export const main = genStdTest(
+  initFunc,
+  paramsFunc,
+  sendTransactionGetReceipt,
+  txInfo,
+  GAS_LIMIT,
+  0
+);

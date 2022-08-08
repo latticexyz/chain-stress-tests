@@ -10,8 +10,6 @@ import {
   Prefabs,
 } from "@latticexyz/stressoor";
 
-const { sendTransactionGetReceipt } = Prefabs.Call;
-const { txInfo } = Prefabs.Metrics;
 const { initHotNonce } = Prefabs.Init;
 
 import { newProvider, newFaucetWallet, genWalletFundInit } from "./utils";
@@ -23,8 +21,10 @@ export type InitFunc = (
 ) => Promise<void>;
 
 export function genStdTest(
-  paramsFunc: ParamsFunc,
   initFunc: InitFunc,
+  paramsFunc: ParamsFunc,
+  callFunc: CallFunc,
+  metricsFunc: MetricsFunc,
   gasLimit: number,
   txCost: number
 ) {
@@ -88,8 +88,8 @@ export function genStdTest(
     );
     const initFuncs = [fundWallet, initHotNonce];
 
-    const callFunc: CallFunc = sendTransactionGetReceipt;
-    const metricsFunc: MetricsFunc = txInfo;
+    // const callFunc: CallFunc = sendTransactionGetReceipt;
+    // const metricsFunc: MetricsFunc = txInfo;
 
     const reportOutputs: any[] = await runStressTest(
       paramsFunc,
