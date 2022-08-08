@@ -8,14 +8,17 @@ const {
   ReportDataArray,
 } = Prefabs.Report;
 
+// TODO: add gas reporting
+
 export const reports: Report[] = [
   new ReportTime(),
   new ReportStats("txLatency", "milliseconds"),
   new ReportStats("txBlockNumberDelta", "blockNumberDelta"),
   new ReportMaxMinMean("txReceiptBlockNumber", "receiptBlockNumber"),
   new ReportMaxMinMean("txStatus", "status"),
+  new ReportMaxMinMean("txL2Success", "l2Success"),
   new ReportTimeTemplatedString(
-    "txPoolGrafanaUrl",
+    "grafanaUrl",
     "<grafanaUrl>&from=$startTime&to=$endTime"
   ),
 ];
