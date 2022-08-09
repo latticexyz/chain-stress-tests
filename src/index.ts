@@ -3,10 +3,16 @@ import { Command } from "commander";
 import { main as sendEth } from "./sendEth";
 import { main as hash } from "./hash";
 import { main as sendEthOpL1 } from "./sendEthOpL1";
+import { main as depTxOpL1 } from "./depTxOpL1";
 import { config as defaultConfig } from "./config";
 
 // Add new stress tests here
-const stressTests: Record<string, any> = { sendEth, hash, sendEthOpL1 };
+const stressTests: Record<string, any> = {
+  sendEth,
+  hash,
+  sendEthOpL1,
+  depTxOpL1,
+};
 
 // Spec command arguments and options
 const program = new Command();

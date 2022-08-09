@@ -16,7 +16,9 @@ export const reports: Report[] = [
   new ReportStats("txBlockNumberDelta", "blockNumberDelta"),
   new ReportMaxMinMean("txReceiptBlockNumber", "receiptBlockNumber"),
   new ReportMaxMinMean("txStatus", "status"),
+  new ReportMaxMinMean("txGasUsed", "gasUsed"),
   new ReportMaxMinMean("txL2Success", "l2Success"),
+  new ReportMaxMinMean("txNEvents", "nEvents"),
   new ReportTimeTemplatedString(
     "grafanaUrl",
     "<grafanaUrl>&from=$startTime&to=$endTime"
