@@ -31,7 +31,7 @@ This will spin up a job in the cluster and run the same stress-test with the par
 
 ```bash
 # Deploy Hasher.sol
-yarn deploy:chain <JSON_RPC>
+yarn deploy:chain <json rpc url> <private key>
 # Do: Set the HASHER_ADDRESS constant in src/hash.ts to the deployed address
 yarn start hash
     <number of transactions to send> \
