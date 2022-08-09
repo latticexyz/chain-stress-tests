@@ -419,7 +419,7 @@
 
 "@latticexyz/stressoor@0.6.1":
   version "0.6.1"
-  resolved "https://npm.pkg.github.com/download/@latticexyz/stressoor/0.6.1/e462970688b2b4ede86022831e65a349e4c14b9c#e462970688b2b4ede86022831e65a349e4c14b9c"
+  resolved "https://registry.yarnpkg.com/@latticexyz/stressoor/-/stressoor-0.6.1.tgz#e462970688b2b4ede86022831e65a349e4c14b9c"
   integrity sha512-drWcYTH+9X9ZQde+raEDPRyJmYUdGm1gpsXV52/lpcxWqr94A9TM/McR9LNvSou2fEbJSxebk9hwybgcgomLYg==
   dependencies:
     "@ethersproject/properties" "^5.6.0"
