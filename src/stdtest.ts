@@ -48,6 +48,7 @@ export function genStdTest(
       seed: testSeed,
       log: config.log,
       gasPrice: config.gasPrice,
+      nWallets: nWallets,
     };
 
     let network: any = undefined;
