@@ -49,6 +49,7 @@ export function genStdTest(
       log: config.log,
       gasPrice: config.gasPrice,
       nWallets: nWallets,
+      nCalls: nCalls,
     };
 
     let network: any = undefined;
