@@ -5,6 +5,8 @@ import {
   Prefabs,
 } from "@latticexyz/stressoor";
 import { Contract } from "@ethersproject/contracts";
+import { BigNumber } from "@ethersproject/bignumber";
+import { randomBytes } from "@ethersproject/random";
 import { defaultAbiCoder as abi } from "@ethersproject/abi";
 import { genStdTest, InitFunc } from "./stdtest";
 
@@ -25,6 +27,7 @@ const BOX_POS = [112, 0, 0];
 const BOX_SIZE = [48, 0, 48];
 
 const DELTA = 0;
+const ENTITY_ID_0 = BigNumber.from(randomBytes(32));
 
 function random(to: number, from = 0): number {
   return Math.floor(Math.random() * (to - from + 1)) + from;
@@ -69,7 +72,7 @@ const paramsFunc: ParamsFunc = async (callContext, testContext) => {
   let args: any[3];
   const nEntities = testContext.nCalls / 2;
   const entityIdx = (callContext.callIdx % nEntities) + DELTA;
-  const entityId = entityIdx + 1e9;
+  const entityId = ENTITY_ID_0.add(entityIdx);
   if (callContext.callIdx < nEntities) {
     args = [
       TYPE_COMPONENT_ADDRESS,
