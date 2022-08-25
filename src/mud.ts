@@ -14,17 +14,19 @@ const { sendTransactionGetReceipt } = Prefabs.Call;
 const { txInfo } = Prefabs.Metrics;
 
 // Constants
-const WORLD_ABI = [
-  "function registerComponentValueSet(address, uint256, bytes)",
+const DEV_SYS_ADDRESS = "0x2279b7a0a67db372996a5fab50d91eaa73d2ebe6";
+const DEV_SYS_ABI = [
+  "function executeTyped(uint256, uint256,  bytes) returns (bytes memory)",
 ];
-const WORLD_ADDRESS = "0x5fbdb2315678afecb367f032d93f642f64180aa3";
-const POS_COMPONENT_ADDRESS = "0x9fe46736679d2d9a65f0992f2272de9f3c7fa6e0";
-const TYPE_COMPONENT_ADDRESS = "0xcf7ed3acca5a467e9e704c703e8d87f634fb0fc9";
+const POS_COMPONENT_ID =
+  "0x3cb5a04c491973ef3e6b8956b1f91e820a6ef59a96ceac588d239c3063b993e4";
+const TYPE_COMPONENT_ID =
+  "0x8bb430fb7cd0ef55fd89d847a9d0ecf29fcb151d75f3697c63e628d7f93e18f9";
 // Hard-coded gas limit
-const GAS_LIMIT = 250000;
+const GAS_LIMIT = 300000;
 
-const BOX_POS = [112, 0, 0];
-const BOX_SIZE = [48, 0, 48];
+const BOX_POS = [-44, 7, 61];
+const BOX_SIZE = [2, 0, 2];
 
 const DELTA = 0;
 const ENTITY_ID_0 = BigNumber.from(randomBytes(32));
@@ -65,7 +67,7 @@ const initFunc: InitFunc = async (
   provider: JsonRpcProvider,
   testContext: TestContext
 ) => {
-  contract = new Contract(WORLD_ADDRESS, WORLD_ABI, provider);
+  contract = new Contract(DEV_SYS_ADDRESS, DEV_SYS_ABI, provider);
 };
 
 const paramsFunc: ParamsFunc = async (callContext, testContext) => {
@@ -75,13 +77,13 @@ const paramsFunc: ParamsFunc = async (callContext, testContext) => {
   const entityId = ENTITY_ID_0.add(entityIdx);
   if (callContext.callIdx < nEntities) {
     args = [
-      TYPE_COMPONENT_ADDRESS,
+      TYPE_COMPONENT_ID,
       entityId,
-      abi.encode(["uint32"], [6]), // Stone
+      abi.encode(["uint32"], [3]), // Log
     ];
   } else {
     args = [
-      POS_COMPONENT_ADDRESS,
+      POS_COMPONENT_ID,
       entityId,
       abi.encode(
         // x y z
@@ -95,7 +97,7 @@ const paramsFunc: ParamsFunc = async (callContext, testContext) => {
       ),
     ];
   }
-  return await contract.populateTransaction.registerComponentValueSet(...args, {
+  return await contract.populateTransaction.executeTyped(...args, {
     gasLimit: GAS_LIMIT,
     gasPrice: testContext.gasPrice,
   });
