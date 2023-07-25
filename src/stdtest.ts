@@ -26,7 +26,8 @@ export function genStdTest(
   callFunc: CallFunc,
   metricsFunc: MetricsFunc,
   gasLimit: number,
-  txCost: number
+  txCost: number,
+  nautChain: boolean = false
 ) {
   return async function main(config: any): Promise<any> {
     /**
@@ -43,6 +44,7 @@ export function genStdTest(
       // We hard-code a margin because we might have to pay for L1 costs
       // TODO: make this cleaner
       1e12 + Math.ceil(nCalls / nWallets) * gasLimit * config.gasPrice + txCost;
+    const walletFundString = walletFunding.toString();
 
     const testContext: TestContext = {
       seed: testSeed,
@@ -77,16 +79,17 @@ export function genStdTest(
 
     const faucetData: any = {
       address: faucet.address,
-      walletFunding: walletFunding,
+      walletFunding: nautChain ? walletFunding : walletFundString,
       nWallets: nWallets,
     };
 
     const fundWallet: StressFunc = genWalletFundInit(
       faucet,
-      walletFunding,
+      nautChain ? walletFunding : walletFundString,
       testContext
     );
     const initFuncs = [fundWallet, initHotNonce];
+
 
     // const callFunc: CallFunc = sendTransactionGetReceipt;
     // const metricsFunc: MetricsFunc = txInfo;

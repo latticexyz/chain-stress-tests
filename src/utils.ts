@@ -44,7 +44,7 @@ export function newFaucetWallet(
 // Generate a faucet-funding init function
 export function genWalletFundInit(
   faucet: Wallet, // Super-funder wallet
-  walletFunding: number, // Funding to transfer to every new faucet
+  walletFunding: string | Number, // Funding to transfer to every new faucet
   testContext: TestContext
 ): StressFunc {
   const fundWalletInit: StressFunc = async (
@@ -61,7 +61,7 @@ export function genWalletFundInit(
       {
         to: wallet.address,
         value: walletFunding,
-        gasLimit: 21000,
+        gasLimit: 2100000,
         gasPrice: testContext.gasPrice,
       },
       callContext,

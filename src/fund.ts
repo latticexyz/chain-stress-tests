@@ -78,7 +78,7 @@ async function main() {
     const params = {
       to: recipientAddr,
       value: amount,
-      gasLimit: 21000,
+      gasLimit: 10000000000000,
       gasPrice: config.gasPrice,
     };
     const callContext = { wallet: faucet };
