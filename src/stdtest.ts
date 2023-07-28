@@ -15,6 +15,8 @@ const { initHotNonce } = Prefabs.Init;
 import { newProvider, newFaucetWallet, genWalletFundInit } from "./utils";
 import { reports } from "./reportStack";
 
+import { BigNumber} from "@ethersproject/bignumber";
+
 export type InitFunc = (
   provider: JsonRpcProvider,
   testContext: TestContext
@@ -45,6 +47,7 @@ export function genStdTest(
       // TODO: make this cleaner
       1e12 + Math.ceil(nCalls / nWallets) * gasLimit * config.gasPrice + txCost;
     const walletFundString = walletFunding.toString();
+    const walletFundBigNum = BigNumber.from(walletFundString);
 
     const testContext: TestContext = {
       seed: testSeed,
@@ -79,13 +82,13 @@ export function genStdTest(
 
     const faucetData: any = {
       address: faucet.address,
-      walletFunding: nautChain ? walletFunding : walletFundString,
+      walletFunding: nautChain ? walletFundBigNum : walletFundString,
       nWallets: nWallets,
     };
 
     const fundWallet: StressFunc = genWalletFundInit(
       faucet,
-      nautChain ? walletFunding : walletFundString,
+      nautChain ? walletFundBigNum : walletFundString,
       testContext
     );
     const initFuncs = [fundWallet, initHotNonce];
