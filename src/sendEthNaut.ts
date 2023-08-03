@@ -19,7 +19,7 @@ import {
     tx = {
       to: "0x0000000000000000000000000000000000000000",
       value: 1,
-      gasLimit: 2100000,
+      gasLimit: 21000,
       gasPrice: testContext.gasPrice,
     };
   };
@@ -33,7 +33,7 @@ import {
     paramsFunc,
     sendTransactionGetReceipt,
     txInfo,
-    2100000,
+    21000,
     1, 
     true
   );

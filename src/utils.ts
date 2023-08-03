@@ -63,7 +63,7 @@ export function genWalletFundInit(
       {
         to: wallet.address,
         value: walletFunding,
-        gasLimit: 2100000,
+        gasLimit: 21000,
         gasPrice: testContext.gasPrice,
       },
       callContext,
