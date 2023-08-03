@@ -13,7 +13,7 @@ const { sendTransactionGetReceipt } = Prefabs.Call;
 const { txInfo } = Prefabs.Metrics;
 
 // Contract constants
-const HASHER_ADDRESS = "0xbb82702D0DD3f86fbe92Bf978617091ccC793093";
+const HASHER_ADDRESS = "0x34140d2716bf37a4f6b57907cf295845b2bd69ba";
 
 // Number of hashes to compute per transaction
 const N_HASHES_TX = 1; //
@@ -29,8 +29,6 @@ const initFunc: InitFunc = async (
   const contract = new Contract(HASHER_ADDRESS, HASHER_OUT.abi, provider);
   // Craft the tx wallet.sendTransaction will be called with
   // callContext: { wallet, callIdx, walletIdx }
-
-  provider.getCode(HASHER_ADDRESS).then((res) => console.log(res))
 
   tx = await contract.populateTransaction.hash(N_HASHES_TX, {
     gasLimit: GAS_LIMIT,
