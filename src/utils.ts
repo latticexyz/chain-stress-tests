@@ -8,8 +8,6 @@ import {
   StressFunc,
 } from "@latticexyz/stressoor";
 
-import { BigNumber} from "@ethersproject/bignumber";
-
 const { sendTransactionGetReceipt } = Prefabs.Call;
 
 const DEFAULT_KEY_PREFIX: string = "fff";

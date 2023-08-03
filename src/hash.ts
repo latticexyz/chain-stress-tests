@@ -29,7 +29,6 @@ const initFunc: InitFunc = async (
   const contract = new Contract(HASHER_ADDRESS, HASHER_OUT.abi, provider);
   // Craft the tx wallet.sendTransaction will be called with
   // callContext: { wallet, callIdx, walletIdx }
-
   tx = await contract.populateTransaction.hash(N_HASHES_TX, {
     gasLimit: GAS_LIMIT,
     gasPrice: testContext.gasPrice,

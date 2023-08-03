@@ -26,7 +26,7 @@ export function genStdTest(
   callFunc: CallFunc,
   metricsFunc: MetricsFunc,
   gasLimit: number,
-  txCost: number,
+  txCost: number
 ) {
   return async function main(config: any): Promise<any> {
     /**
@@ -88,7 +88,6 @@ export function genStdTest(
       testContext
     );
     const initFuncs = [fundWallet, initHotNonce];
-
 
     // const callFunc: CallFunc = sendTransactionGetReceipt;
     // const metricsFunc: MetricsFunc = txInfo;
