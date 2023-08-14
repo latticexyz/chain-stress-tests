@@ -43,6 +43,7 @@ export function genStdTest(
       // We hard-code a margin because we might have to pay for L1 costs
       // TODO: make this cleaner
       1e12 + Math.ceil(nCalls / nWallets) * gasLimit * config.gasPrice + txCost;
+    const walletFundString = walletFunding.toString();
 
     const testContext: TestContext = {
       seed: testSeed,
@@ -77,13 +78,13 @@ export function genStdTest(
 
     const faucetData: any = {
       address: faucet.address,
-      walletFunding: walletFunding,
+      walletFunding: walletFundString,
       nWallets: nWallets,
     };
 
     const fundWallet: StressFunc = genWalletFundInit(
       faucet,
-      walletFunding,
+      walletFundString,
       testContext
     );
     const initFuncs = [fundWallet, initHotNonce];
